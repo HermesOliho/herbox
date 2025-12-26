@@ -27,7 +27,7 @@
         <AppName />
       </RouterLink>
       <!-- Liens rapides -->
-      <div class="flex gap-4">
+      <div class="hidden lg:flex gap-4">
         <RouterLink to="#" class="link link-hover link-secondary"> Accueil </RouterLink>
         <RouterLink to="#" class="link link-hover link-secondary"> Séries </RouterLink>
         <RouterLink to="#" class="link link-hover link-secondary"> Films </RouterLink>
@@ -36,7 +36,7 @@
     </div>
     <!-- Partie droite -->
     <div class="flex-none flex gap-4 items-center">
-      <div class="flex items-center gap-2">
+      <div class="hidden lg:flex items-center gap-2">
         <button class="btn btn-square btn-ghost">
           <Search :size="20" />
         </button>
@@ -46,15 +46,84 @@
           class="input input-sm input-bordered hidden md:inline-block transition-all duration-300 ease-in-out focus:w-64"
         />
       </div>
-      <div class="flex">
+      <!-- Lien de connexion & inscription -->
+      <div v-if="!authStore.isAuthenticated()" class="hidden lg:flex gap-2">
+        <RouterLink to="/login" class="btn btn-ghost btn-sm">Connexion</RouterLink>
+        <RouterLink to="/register" class="btn btn-primary btn-sm">Inscription</RouterLink>
+      </div>
+      <!-- Affichage du nom de l'utilisateur connecté -->
+      <div v-else class="hidden lg:flex items-center gap-2">
+        <span class="font-medium">Bonjour, {{ authStore.user?.name }}</span>
+        <RouterLink to="/logout" class="btn btn-ghost btn-sm">Déconnexion</RouterLink>
+      </div>
+      <!-- Changement de thème -->
+      <div class="hidden lg:flex">
         <ThemeChanger />
       </div>
+      <!-- Menu de l'utilisateur -->
+      <button
+        class="btn btn-ghost btn-circle"
+        popovertarget="userMenu"
+        style="anchor-name: userMenuAnchor"
+        v-if="authStore.isAuthenticated()"
+      >
+        <User :size="24" />
+      </button>
+      <ul
+        class="dropdown dropdown-end menu w-52 rounded-box bg-base-100 shadow-sm"
+        popover
+        id="userMenu"
+        style="position-anchor: userMenuAnchor"
+        v-if="authStore.isAuthenticated()"
+      >
+        <li><RouterLink to="#">Profil</RouterLink></li>
+        <li><RouterLink to="#">Paramètres</RouterLink></li>
+        <div class="divider"></div>
+        <li><RouterLink to="/logout" class="text-error">Déconnexion</RouterLink></li>
+      </ul>
+      <!-- Navigation sur petits & moyens écrans -->
+      <button
+        class="btn btn-square lg:hidden btn-ghost"
+        popovertarget="smScreensMenu"
+        style="anchor-name: smScreensMenuAnchor"
+      >
+        <MenuIcon :size="24" />
+      </button>
+      <ul
+        class="dropdown dropdown-end menu w-52 rounded-box bg-base-100 shadow-sm lg:hidden"
+        popover
+        id="smScreensMenu"
+        style="position-anchor: smScreensMenuAnchor"
+      >
+        <li><RouterLink to="#">Accueil</RouterLink></li>
+        <li><RouterLink to="#">Séries</RouterLink></li>
+        <li><RouterLink to="#">Films</RouterLink></li>
+        <li><RouterLink to="#">Ma liste</RouterLink></li>
+        <div class="divider"></div>
+        <li v-if="!authStore.isAuthenticated()">
+          <RouterLink to="/login">Connexion</RouterLink>
+        </li>
+        <li v-if="!authStore.isAuthenticated()">
+          <RouterLink to="/register">Inscription</RouterLink>
+        </li>
+        <li v-else>
+          <RouterLink to="/logout">Déconnexion</RouterLink>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { Search } from 'lucide-vue-next'
+import { Menu, MenuIcon, Search, User } from 'lucide-vue-next'
 import AppLogo from './ui/AppLogo.vue'
 import AppName from './ui/AppName.vue'
 import ThemeChanger from './ui/ThemeChanger.vue'
+import { useAuthStore } from '@/stores/auth'
+import { onMounted } from 'vue'
+
+const authStore = useAuthStore()
+
+onMounted(() => {
+  console.log(authStore.isAuthenticated())
+})
 </script>
