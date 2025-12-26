@@ -8,6 +8,12 @@ const router = createRouter({
       name: 'home',
       component: () => import('@/pages/HomePage.vue'),
     },
+    // La page d'erreur 404
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/pages/NotFoundPage.vue'),
+    },
   ],
 })
 

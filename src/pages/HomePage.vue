@@ -1,3 +1,7 @@
 <template>
-  <h1>Bienvenue sur <span class="app-name">HerBox</span></h1>
+  <AllVideosView />
 </template>
+
+<script setup lang="ts">
+import AllVideosView from '@/views/videos/AllVideosView.vue'
+</script>

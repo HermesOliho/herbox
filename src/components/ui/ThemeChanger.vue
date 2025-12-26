@@ -17,7 +17,11 @@ const switchDarkMode = () => {
 
 onMounted(() => {
   const currentTheme = localStorage.getItem('appTheme')
-  if (currentTheme === 'dark') {
+  if (
+    currentTheme === 'dark' ||
+    document.documentElement.classList.contains('dark') ||
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  ) {
     isDarkMode.value = true
     changeDocumentTheme()
   } else {

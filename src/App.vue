@@ -5,9 +5,9 @@ import AppNavbar from './components/AppNavbar.vue'
 </script>
 
 <template>
-  <div id="app" class="min-h-screen bg-base-200 text-base-content">
+  <div id="app" class="min-h-screen w-full overflow-x-hidden bg-base-200 text-base-content">
     <AppNavbar />
-    <main class="p-4">
+    <main>
       <router-view />
     </main>
   </div>
