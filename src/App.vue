@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import '@/assets/css/index.css'
 import ThemeChanger from './components/ui/ThemeChanger.vue'
+import AppNavbar from './components/AppNavbar.vue'
 </script>
 
 <template>
-  <h1 class="text-3xl dark:text-blue-400">You did it!</h1>
-  <ThemeChanger />
+  <div id="app" class="min-h-screen bg-base-200 text-base-content">
+    <AppNavbar />
+    <main class="p-4">
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
