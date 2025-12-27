@@ -1,4 +1,4 @@
-import type { Video } from '@/types/video'
+import type { Movie } from '@/types/video'
 
 const mockVideos = [
   {
@@ -54,7 +54,7 @@ const mockVideos = [
     videoUrl: 'https://example.com/video5.mp4',
   },
 ]
-export const fetchAllVideos = async (): Promise<Video[]> => {
+export const fetchAllVideos = async (): Promise<Movie[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockVideos)
@@ -62,7 +62,7 @@ export const fetchAllVideos = async (): Promise<Video[]> => {
   })
 }
 
-export const fetchVideoBySlug = async (slug: string) => {
+export const fetchVideoBySlug = async (slug: string): Promise<Movie | null> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const video = mockVideos.find((v) => v.slug === slug)

@@ -7,7 +7,7 @@ const changeDocumentTheme = () => {
   localStorage.setItem('appTheme', isDarkMode.value ? 'dark' : 'light')
   document.documentElement.classList.remove(isDarkMode.value ? 'light' : 'dark')
   document.documentElement.classList.add(isDarkMode.value ? 'dark' : 'light')
-  document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light')
+  document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'fantasy')
 }
 
 const switchDarkMode = () => {

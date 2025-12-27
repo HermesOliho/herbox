@@ -1,11 +1,15 @@
 <template>
-  <div class="card bg-base-100 w-full shadow-sm">
-    <figure>
+  <div
+    class="card bg-base-100 hover:bg-gray-500/15 transition-all duration-300 ease-in-out hover:shadow-lg w-full shadow-sm"
+  >
+    <figure @click="emit('watch-video', video.slug)" class="cursor-pointer">
       <img :src="video.posterUrl" :alt="video.title" />
     </figure>
     <div class="card-body">
       <h2 class="card-title">
-        <RouterLink :to="`/videos/${video.slug}`">{{ video.title }}</RouterLink>
+        <RouterLink :to="{ name: 'watch-movie', params: { slug: video.slug } }">
+          {{ video.title }}
+        </RouterLink>
       </h2>
       <p class="line-clamp-3 text-sm text-secondary-content mb-4">{{ video.description }}</p>
       <div class="flex flex-wrap gap-2">
@@ -29,10 +33,15 @@
 </template>
 
 <script setup lang="ts">
-import type { Video } from '@/types/video'
+import type { Movie } from '@/types/video'
 import { PlusCircle } from 'lucide-vue-next'
 
 defineProps<{
-  video: Video
+  video: Movie
+}>()
+
+const emit = defineEmits<{
+  (e: 'add-to-watchlist', videoId: string): void
+  (e: 'watch-video', slug: string): void
 }>()
 </script>

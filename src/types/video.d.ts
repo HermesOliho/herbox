@@ -1,4 +1,4 @@
-export interface Video {
+export interface Movie {
   id: string
   title: string
   slug: string

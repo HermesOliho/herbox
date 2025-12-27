@@ -28,7 +28,9 @@
       </RouterLink>
       <!-- Liens rapides -->
       <div class="hidden lg:flex gap-4">
-        <RouterLink to="#" class="link link-hover link-secondary"> Accueil </RouterLink>
+        <RouterLink :to="{ name: 'home' }" class="link link-hover link-secondary">
+          Accueil
+        </RouterLink>
         <RouterLink to="#" class="link link-hover link-secondary"> Séries </RouterLink>
         <RouterLink to="#" class="link link-hover link-secondary"> Films </RouterLink>
         <RouterLink to="#" class="link link-hover link-secondary"> Ma liste </RouterLink>
@@ -95,7 +97,7 @@
         id="smScreensMenu"
         style="position-anchor: smScreensMenuAnchor"
       >
-        <li><RouterLink to="#">Accueil</RouterLink></li>
+        <li><RouterLink :to="{ name: 'home' }">Accueil</RouterLink></li>
         <li><RouterLink to="#">Séries</RouterLink></li>
         <li><RouterLink to="#">Films</RouterLink></li>
         <li><RouterLink to="#">Ma liste</RouterLink></li>

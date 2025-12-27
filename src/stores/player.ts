@@ -1,4 +1,4 @@
-import type { Video } from '@/types/video'
+import type { Movie } from '@/types/video'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
@@ -6,14 +6,14 @@ export const usePlayerStore = defineStore(
   'player',
   () => {
     // States
-    const currentVideo: Ref<Video | null> = ref(null)
+    const currentVideo: Ref<Movie | null> = ref(null)
     const isPlaying: Ref<boolean> = ref(false)
     const currentTime: Ref<number> = ref(0)
     const isMiniPlayer: Ref<boolean> = ref(false)
-    const queue: Ref<Video[]> = ref([])
+    const queue: Ref<Movie[]> = ref([])
 
     // Actions
-    const playVideo = (video: Video) => {
+    const playVideo = (video: Movie) => {
       currentVideo.value = video
       isPlaying.value = true
     }
